@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+	<title>Node Authentication</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> <!-- load bootstrap css -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> <!-- load fontawesome -->
+	<style>
+		body 		{ padding-top:80px; }
+		li {margin: 5px 10px;
+			display: inline-flex;
+			font-weight: bold;
+			border-bottom: 2px solid black;
+		}
+		.details {
+			display: none;
+		}
+
+		#historyChart {
+			margin: auto;
+		}
+	</style>
+</head>
+<body>
+<div class="container">
+
+	<div class="jumbotron text-center">
+		<h1><span class="fa fa-flag"></span> Country Sim</h1>
+		<div style="">
+			<h4>Average Development: <h4 id="averageDevelopment"></h4><button onclick="countryController.marketCrash()" class="btn btn-danger">Market Crash!</button></h4>
+			<h4>Average Number of Trades: <h4 id="averageNumberOfTrades"></h4></h4>
+		</div>
+		<div id="historyChart" style="width:600px;height:300px"></div>
+	</div>
+	<div id="countryContainer" class="jumbotron text-center">
+		
+	</div>
+	<script src="/country.js" type="text/javascript" charset="utf-8" async defer></script>
+	<script src="https://cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" type="text/javascript" charset="utf-8" async defer></script>
+	<script src="https://cdn.jsdelivr.net/excanvas/r3/excanvas.compiled.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.min.js"></script>
+
+	<script type="text/javascript" charset="utf-8" async defer>
+		var devHistory = [];
+		setInterval(function(){ 
+			devHistory = [];
+			devHistory.push(countryController.developmentHistory);
+			devHistory.push(countryController.tradeHistory);
+			$.plot($("#historyChart"), devHistory, {});
+		}, 1000);
+	</script>
+</div>
+</body>
+</html>
